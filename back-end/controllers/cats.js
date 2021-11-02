@@ -14,4 +14,21 @@ router.post('/', (req, res) => {
   });
 });
 
+router.delete('/:id', (req, res) => {
+  Cats.findByIdAndRemove(req.params.id, (err, deletedCat) => {
+    res.json(deletedCat);
+  });
+});
+
+router.put('/:id', (req, res) => {
+  Cats.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedCat) => {
+      res.json(updatedCat);
+    }
+  );
+});
+
 module.exports = router;
